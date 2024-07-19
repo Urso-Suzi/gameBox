@@ -12,13 +12,13 @@ let megaman = new Image()
 
 
 let anima = setInterval(() => {
-    posicaoImg+=1
+    posicaoImg++
     PosicaoX = posicaoImg * 570
     PosicaoY = PosicaoImg2 * 570
-    if((posicaoImg == 4) && (PosicaoX == 2280)) {
+    if((posicaoImg == 4) && (PosicaoImg2 != 1)) {
         posicaoImg = 0
         PosicaoImg2 = 1
-    }  if ((PosicaoX == 2280) && (PosicaoImg2 == 1)) {
+    }else if((posicaoImg == 4) && (PosicaoImg2 == 1)) {
         posicaoImg = 0
         PosicaoImg2 = 0
     } 
@@ -31,4 +31,4 @@ let anima = setInterval(() => {
         ctx.drawImage(megaman,PosicaoX,PosicaoY,500,550,0,0,100,100)
     })
     ctx.clearRect(0,0,500,500)
-},1000)
+},100)
