@@ -13,21 +13,22 @@ let saltoSprite = 252
 let saltoColunaSprite = 380
 let posicaoXInC = 0
 let posicaoYInC = 0
-let velocidade = 7
-
+let velocidade = 3
+let cima = false, baixo = false, esquerda = false, direita = false
 garoto.src="movimento.png"
+
+// Joga o garoto na tela, assim que a tela é carregada
+
+
+
+// Função que desenha o movimento para o personagem.
+
+
 garoto.addEventListener('load', () => {
-    ctx.drawImage(garoto,PosicaoX,0,250,380,posicaoXInC,posicaoYInC,78,100)
+    
 })
 
 let anima = setInterval (() => {
-
-    
-    
-    
-    
-    
-    
      PosicaoX = numSprite * saltoSprite
 
     garoto.src="movimento.png"
@@ -45,19 +46,45 @@ let anima = setInterval (() => {
 
 
 
+
+
 //Movimento do personagem
 window.addEventListener('keydown', (event) => {
-       if(event.key === 'ArrowRight') {
-    posicaoXInC += velocidade
+    if(event.key === 'ArrowRight') {
+    direita = true
     PosicaoY = saltoColunaSprite * 3
    } else if (event.key === 'ArrowLeft') {
-    posicaoXInC -= velocidade
+    esquerda = true
     PosicaoY = saltoColunaSprite * 2
    }  else if (event.key === 'ArrowUp') {
-    posicaoYInC -= velocidade
+    cima = true
     PosicaoY = saltoColunaSprite * 1
    } else if (event.key === 'ArrowDown') {
-    posicaoYInC += velocidade
+    baixo = true
+    PosicaoY = saltoColunaSprite * 0
+   }
+
+   //condicao das parede laterais
+   if(posicaoXInC > 425) {
+        posicaoXInC = 425
+   } else if (posicaoXInC < -5) {
+        posicaoXInC = -5
+   }
+   
+})
+
+window.addEventListener('keyup', (event) => {
+    if(event.key === 'ArrowRight') {
+    direita = false
+    PosicaoY = saltoColunaSprite * 3
+   } else if (event.key === 'ArrowLeft') {
+    esquerda = false
+    PosicaoY = saltoColunaSprite * 2
+   }  else if (event.key === 'ArrowUp') {
+    cima = false
+    PosicaoY = saltoColunaSprite * 1
+   } else if (event.key === 'ArrowDown') {
+    baixo = false
     PosicaoY = saltoColunaSprite * 0
    }
    //condicao das parede laterais
@@ -66,7 +93,30 @@ window.addEventListener('keydown', (event) => {
    } else if (posicaoXInC < -5) {
         posicaoXInC = -5
    }
+   
 })
+
+
+const game = () => {
+    if(cima) {
+        posicaoYInC -= velocidade
+    }
+    if(baixo) {
+        posicaoYInC += velocidade
+    }
+    if(esquerda) {
+        posicaoXInC -= velocidade
+    }
+    if(direita) {
+        posicaoXInC += velocidade
+    }    
+    requestAnimationFrame(game)
+    desenha()
+}
+
+
+requestAnimationFrame(game)
+
 
 
 
