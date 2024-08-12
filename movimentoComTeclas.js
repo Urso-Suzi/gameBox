@@ -13,7 +13,7 @@ let saltoSprite = 252
 let saltoColunaSprite = 380
 let posicaoXInC = 0
 let posicaoYInC = 0
-let velocidade = 3
+let velocidade = 2
 let cima = false, baixo = false, esquerda = false, direita = false
 garoto.src="movimento.png"
 
@@ -50,6 +50,14 @@ let anima = setInterval (() => {
 
 //Movimento do personagem
 window.addEventListener('keydown', (event) => {
+    //condicao das parede laterais
+    if(posicaoXInC > 425) {
+         direita = 425
+    } else if (posicaoXInC < -5) {
+         posicaoXInC = -5
+    }
+
+
     if(event.key === 'ArrowRight') {
     direita = true
     PosicaoY = saltoColunaSprite * 3
@@ -64,16 +72,18 @@ window.addEventListener('keydown', (event) => {
     PosicaoY = saltoColunaSprite * 0
    }
 
-   //condicao das parede laterais
-   if(posicaoXInC > 425) {
-        posicaoXInC = 425
-   } else if (posicaoXInC < -5) {
-        posicaoXInC = -5
-   }
    
 })
 
 window.addEventListener('keyup', (event) => {
+    //condicao das parede laterais
+    if(posicaoXInC > 425) {
+         posicaoXInC = 425
+    } else if (posicaoXInC < -5) {
+         posicaoXInC = -5
+    }
+
+    
     if(event.key === 'ArrowRight') {
     direita = false
     PosicaoY = saltoColunaSprite * 3
@@ -87,13 +97,8 @@ window.addEventListener('keyup', (event) => {
     baixo = false
     PosicaoY = saltoColunaSprite * 0
    }
-   //condicao das parede laterais
-   if(posicaoXInC > 425) {
-        posicaoXInC = 425
-   } else if (posicaoXInC < -5) {
-        posicaoXInC = -5
-   }
-   
+
+
 })
 
 
